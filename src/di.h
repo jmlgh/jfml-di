@@ -32,6 +32,6 @@ public:
         return std::static_pointer_cast<T>(it->second());
     }
 private:
-    // Maps a type's unique runtime identifier (std::type_index) to a constructor (std::function)
+    // Maps a type's unique runtime identifier (std::type_index) to a constructor (stgit push -u origin maind::function)
     std::unordered_map<std::type_index, std::function<std::shared_ptr<void>()>> registry;
 };

@@ -14,6 +14,5 @@ find_package(GTest REQUIRED)
 include_directories(${GTEST_INCLUDE_DIRS})
 
 # Test executable
-add_executable(ditests tests/DependencyContainerTest.cpp
-        tests/ditest.cpp)
+add_executable(ditests tests/ditest.cpp)
 target_link_libraries(ditests di GTest::GTest GTest::Main)
