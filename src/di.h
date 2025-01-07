@@ -14,10 +14,12 @@ class DependencyContainer {
 public:
     // Register a type T and its constructor with the given args
     template <typename T, typename... Args>
-    void registerType() {
+    void registerType(Args&&... args) {
         // typeid - retrieves a unique runtime identifier for type T
-        registry[typeid(T)] = []() -> std::shared_ptr<void> {
-            return std::make_shared<T>();
+        registry[typeid(T)] = [args = std::make_tuple(std::forward<Args>(args)...)]() -> std::shared_ptr<void> {
+            return std::apply([](auto&&... unpackedArgs) {
+                return std::make_shared<T>(std::forward<decltype(unpackedArgs)>(unpackedArgs)...);
+            }, args);
         };
     }
 
